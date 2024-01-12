@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Hello there {% endblock %}
+
+{% block header %}Welcome all{% endblock %}
+
+{% block content %}
+<div class="content_wrapper">
+    <div class="admin_panel">
+        <form name="profileForm" method="POST" action="">
+            <div class="formObject">
+                {% csrf_token %}
+                <label for="menu_id">Select a user from the list to edit:</label>
+                <select id="menu_id" name="menu" onChange="top.location.href=this.options[this.selectedIndex].value;">
+                    <option>Please select a user</option>
+                {% for profile in profiles %}
+                    <option value="../{{ profile.pk }}/details/">{{ profile.userName}}</option>
+                {% endfor %}
+                </select>
+                <div class="fromBtn_container">
+                    <a href="{% url 'createProfile' %}"><button type="button" class="btn">Create New Profile</button></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
